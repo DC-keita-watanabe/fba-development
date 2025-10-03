@@ -10,23 +10,22 @@ export class VpcStack extends cdk.Stack {
 
     // VPC, サブネットの作成
     this.vpc = new ec2.Vpc(this, 'MyVPC', {
-      cidr: '192.168.0.0/17',
+      ipAddresses: ec2.IpAddresses.cidr('192.168.0.0/17'),
+      vpcName: 'fba-dev-vpc',
       maxAzs: 2,
       subnetConfiguration: [
         {
-          name: 'PublicSubnet',
+          name: 'fba-dev-public1',
           subnetType: ec2.SubnetType.PUBLIC,
           cidrMask: 24,
         },
-        {
-          name: 'PrivateSubnet1',
+        { name: 'fba-dev-private1',
           subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-          cidrMask: 24,
+          cidrMask: 24
         },
-        {
-          name: 'PrivateSubnet2',
+        { name: 'fba-dev-private2',
           subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-          cidrMask: 24,
+          cidrMask: 24
         },
       ],
     });
