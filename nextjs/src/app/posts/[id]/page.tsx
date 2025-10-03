@@ -4,6 +4,7 @@ import Link from 'next/link';
 import PostDetailBody from '@/components/post/PostDetailBody';
 import CommentList from '@/components/comment/CommentList';
 import CommentForm from '@/components/comment/CommentForm';
+export const dynamic = "force-dynamic";
 
 
 export default async function PostDetail({ params }: { params: { id: string } }) {
