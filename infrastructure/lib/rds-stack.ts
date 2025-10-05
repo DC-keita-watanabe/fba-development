@@ -36,7 +36,7 @@ export class RdsStack extends cdk.Stack {
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
       vpc: props.vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      credentials: rds.Credentials.fromGeneratedSecret('fba_admin'), // ユーザー名: postgres
+      credentials: rds.Credentials.fromGeneratedSecret('fba_admin'),
       securityGroups: [rdsSecurityGroup],
       multiAz: false,
       removalPolicy: cdk.RemovalPolicy.DESTROY,   // 検証用       // 検証用
