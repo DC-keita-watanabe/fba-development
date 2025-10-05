@@ -15,7 +15,7 @@ export default async function PostDetail({ params }: { params: { id: string } })
       {/* ヘッダー */}
       <header className="bg-gradient-to-r from-blue-600 to-cyan-500 shadow-lg">
         <div className="max-w-4xl mx-auto px-6 py-6">
-          <Link href={'/'} className="flex items-center gap-2 text-white hover:text-blue-100 transition-colors mb-4">
+          <Link href={'/posts'} className="flex items-center gap-2 text-white hover:text-blue-100 transition-colors mb-4">
             <ArrowLeft size={20} />
             <span>一覧に戻る</span>
           </Link>
