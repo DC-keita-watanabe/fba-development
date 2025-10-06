@@ -22,11 +22,7 @@ export class RdsStack extends cdk.Stack {
     });
 
     // 踏み台 EC2 からのみ 5432(PostgreSQL) を許可
-    rdsSecurityGroup.addIngressRule(
-      ec2.Peer.securityGroupId(props.bastionEc2SecurityGroup.securityGroupId),
-      ec2.Port.tcp(5432),
-      'Allow PostgreSQL from Bastion EC2'
-    );
+    props.bastionEc2SecurityGroup.connections.allowTo(rdsSecurityGroup, ec2.Port.tcp(5432));
 
     // PostgreSQL RDS インスタンス作成
     this.dbInstance = new rds.DatabaseInstance(this, 'MyPostgresInstance', {

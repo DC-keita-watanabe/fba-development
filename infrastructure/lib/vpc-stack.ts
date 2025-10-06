@@ -13,6 +13,7 @@ export class VpcStack extends cdk.Stack {
       ipAddresses: ec2.IpAddresses.cidr('192.168.0.0/17'),
       vpcName: 'fba-dev-vpc',
       maxAzs: 2,
+      natGateways: 1,
       subnetConfiguration: [
         {
           name: 'fba-dev-public1',
@@ -20,10 +21,6 @@ export class VpcStack extends cdk.Stack {
           cidrMask: 24,
         },
         { name: 'fba-dev-private1',
-          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-          cidrMask: 24
-        },
-        { name: 'fba-dev-private2',
           subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
           cidrMask: 24
         },

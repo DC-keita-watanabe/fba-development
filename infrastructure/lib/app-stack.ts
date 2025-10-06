@@ -45,7 +45,7 @@ export class AppStack extends cdk.Stack {
 
     // Lambda Docker イメージ関数作成
     const webLambda = new lambda.DockerImageFunction(this, 'WebLambda', {
-      code: lambda.DockerImageCode.fromImageAsset(path.join(__dirname, '')),
+      code: lambda.DockerImageCode.fromImageAsset(path.join(__dirname, '../../nextjs/src/Dockerfile')),
       vpc: props.vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       securityGroups: [lambdaSg],
@@ -67,16 +67,16 @@ export class AppStack extends cdk.Stack {
     });
 
     // CloudFront Distribution
-    const url = new URL(funcUrl.url);
+    // const url = new URL(funcUrl.url);
 
-    const cloudfrontDistribution = new cloudfront.Distribution(this, 'WebDistribution', {
-      defaultBehavior: {
-        origin: new origins.HttpOrigin(url.host, {
-          protocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY,
-        }),
-        cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-        allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
-      },
-    });
+    // const cloudfrontDistribution = new cloudfront.Distribution(this, 'WebDistribution', {
+    //   defaultBehavior: {
+    //     origin: new origins.HttpOrigin(url.host, {
+    //       protocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY,
+    //     }),
+    //     cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+    //     allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+    //   },
+    // });
   }
 }

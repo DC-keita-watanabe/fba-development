@@ -22,9 +22,6 @@ export class BastionEc2Stack extends cdk.Stack {
     // SSH (22) を許可
     this.securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'Allow SSH access from anywhere');
 
-    // 既存キーペアの取得
-    const importedKeyPair = ec2.KeyPair.fromKeyPairName(this, 'ImportedKeyPair', 'my-keypair');
-
     // EC2 インスタンス作成
     const ec2Instance = new ec2.Instance(this, 'MyEC2Instance', {
       vpc: props.vpc,
@@ -32,7 +29,7 @@ export class BastionEc2Stack extends cdk.Stack {
       machineImage: ec2.MachineImage.latestAmazonLinux2(),
       securityGroup: this.securityGroup,
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }, // 公開サブネットに配置
-      keyPair: importedKeyPair,
+      keyPair: ec2.KeyPair.fromKeyPairName(this, 'ImportedKeyPair', 'my-keypair'),
     });
   }
 }
